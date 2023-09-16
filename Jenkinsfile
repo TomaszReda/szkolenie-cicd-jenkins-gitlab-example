@@ -8,9 +8,7 @@ pipeline {
 
 
     stages {
-
-
-               stage('Clean repositoryy') {
+   stage('Clean repository') {
                     steps {
                         cleanWs()
                     }
@@ -37,10 +35,6 @@ pipeline {
         }
 
 
-               stage('Clean repository') {
-                    steps {
-                        cleanWs()
-                    }
-                }
+
     }
 }
