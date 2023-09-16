@@ -29,6 +29,25 @@
 		</dependency>
 	</dependencies>
 
+
+	
+	<scm>
+		<connection>scm:git:git://github.com/TomaszReda/szkolenie-cicd-jenkins-gitlab-example.git</connection>
+		<developerConnection>scm:git:ssh://github.com/TomaszReda/szkolenie-cicd-jenkins-gitlab-example.git</developerConnection>
+		<url>https://github.com/TomaszReda/szkolenie-cicd-jenkins-gitlab-example</url>
+	</scm>
+
+	<distributionManagement>
+		<repository>
+			<id>release-repo</id>
+			<url>http://10.222.20.211:8081/szkolenie-mvn-released/</url>
+		</repository>
+		<snapshotRepository>
+			<id>snapshot-repo</id>
+			<url>http://10.222.20.211:8081/szkolenie-mvn-snapshot/</url>
+		</snapshotRepository>
+	</distributionManagement>
+
 	<build>
 		<plugins>
 			<plugin>

@@ -1,43 +1,30 @@
-#!groovy
-
 pipeline {
     agent any
 
-    tools {
+  tools {
         maven 'maven-3'
         jdk "jdk-17"
     }
 
     stages {
-        stage('Cleanup') {
+        stage('Start release') {
             steps {
-                cleanWs()
+                script {
+                    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'gitlab-tmaszreda', usernameVariable: 'GITHUB_USER', passwordVariable: 'GITHUB_TOKEN']]) {
+                        sh "mvn -B -Dusername=${GITHUB_USER} -Dpassword=${GITHUB_TOKEN} release:prepare"
+                    }
+                }
             }
         }
-        stage('Checkout') {
+
+        stage('Finish release') {
             steps {
-                git(url: 'http://github.com/spring-projects/spring-petclinic.git', branch: 'main')
-            }
-        }
-        stage('Build & Test') {
-            steps {
-                sh 'mvn clean test'
-            }
-            post {
-                always {
-                    junit '**/target/surefire-reports/*.xml'
-                }
-                success {
-                    slackSend(color: 'good', message: "SUCCESS: Job '${env.BUILD_TAG}' <${env.BUILD_URL}|link> completed successfully.", channel: "#jenkins-tomasz-reda")
-                }
-                failure {
-                    slackSend(color: 'danger', message: "FAILURE: Job '${env.BUILD_TAG}' <${env.BUILD_URL}|link> has failed.", channel: "#jenkins-tomasz-reda")
-                }
-                unstable {
-                    slackSend(color: 'warning', message: "UNSTABLE: Job '${env.BUILD_TAG}' <${env.BUILD_URL}|link> is unstable.", channel: "#jenkins-tomasz-reda")
+                script {
+                    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'gitlab-tmaszreda', usernameVariable: 'GITHUB_USER', passwordVariable: 'GITHUB_TOKEN']]) {
+                        sh "mvn -B -Dusername=${GITHUB_USER} -Dpassword=${GITHUB_TOKEN} release:perform"
+                    }
                 }
             }
         }
     }
-
 }
