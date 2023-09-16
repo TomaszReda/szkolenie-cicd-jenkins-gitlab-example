@@ -6,11 +6,14 @@ pipeline {
         jdk "jdk-17"
     }
 
-   stage
 
     stages {
 
-
+               stage('Clean repository') {
+                    steps {
+                        cleanWs()
+                    }
+                }
 
         stage('Start release') {
             steps {
