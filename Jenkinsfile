@@ -9,11 +9,6 @@ pipeline {
 
     stages {
 
-               stage('Clean repository') {
-                    steps {
-                        cleanWs()
-                    }
-                }
 
         stage('Start release') {
             steps {
@@ -34,5 +29,12 @@ pipeline {
                 }
             }
         }
+
+
+               stage('Clean repository') {
+                    steps {
+                        cleanWs()
+                    }
+                }
     }
 }
