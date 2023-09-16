@@ -10,7 +10,7 @@ pipeline {
     stages {
 
 
-               stage('Clean repository') {
+               stage('Clean repositoryy') {
                     steps {
                         cleanWs()
                     }
