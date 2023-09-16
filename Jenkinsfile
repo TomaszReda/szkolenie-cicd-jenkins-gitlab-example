@@ -10,7 +10,7 @@ pipeline {
         stage('Start release') {
             steps {
                 script {
-                    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'gitlab-tmaszreda', usernameVariable: 'GITHUB_USER', passwordVariable: 'GITHUB_TOKEN']]) {
+                    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: '69cf887a-1206-4c7d-98c1-cfb1a41b7d72', usernameVariable: 'GITHUB_USER', passwordVariable: 'GITHUB_TOKEN']]) {
                         sh "mvn -B -Dusername=${GITHUB_USER} -Dpassword=${GITHUB_TOKEN} release:prepare"
                     }
                 }
@@ -20,7 +20,7 @@ pipeline {
         stage('Finish release') {
             steps {
                 script {
-                    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'gitlab-tmaszreda', usernameVariable: 'GITHUB_USER', passwordVariable: 'GITHUB_TOKEN']]) {
+                    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: '69cf887a-1206-4c7d-98c1-cfb1a41b7d72', usernameVariable: 'GITHUB_USER', passwordVariable: 'GITHUB_TOKEN']]) {
                         sh "mvn -B -Dusername=${GITHUB_USER} -Dpassword=${GITHUB_TOKEN} release:perform"
                     }
                 }
