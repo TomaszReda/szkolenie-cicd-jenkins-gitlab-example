@@ -8,11 +8,7 @@ pipeline {
 
 
     stages {
-   stage('Clean repository') {
-                    steps {
-                        cleanWs()
-                    }
-                }
+
 
         stage('Start release') {
             steps {
