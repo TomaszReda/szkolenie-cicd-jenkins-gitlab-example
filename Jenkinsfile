@@ -30,7 +30,11 @@ pipeline {
             }
         }
 
-
+   stage('Clean repository') {
+                    steps {
+                        cleanWs()
+                    }
+                }
 
     }
 }
